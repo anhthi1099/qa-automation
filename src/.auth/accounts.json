@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "username": "qatest2@gmail.com",
+      "password": "Password123!@#",
+      "email": "qatest2@gmail.com",
+      "roles": ["admin", "user"],
+      "createdAt": "2023-01-01T12:00:00Z",
+      "lastLogin": "2023-10-01T08:30:00Z"
+    },
+    {
+      "username": "user2",
+      "password": "password2",
+      "email": "user2@example.com",
+      "roles": ["user"],
+      "createdAt": "2023-02-15T09:00:00Z",
+      "lastLogin": "2023-10-02T09:45:00Z"
+    },
+    {
+      "username": "user3",
+      "password": "password3",
+      "email": "user3@example.com",
+      "roles": ["user", "editor"],
+      "createdAt": "2023-03-20T14:30:00Z",
+      "lastLogin": "2023-10-03T10:15:00Z"
+    }
+  ]
+}
