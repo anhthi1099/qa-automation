@@ -69,3 +69,11 @@ When('I click on the {string} dialog title', async (dialogName: string) => {
 When('I click pencil to edit the {string} section', async (sectionName: string) => {
   await commonActions.clickEditSection(sectionName);
 });
+
+Then('I can see the result list has job with {string} title', async (sectionName: string) => {
+  await commonActions.checkJobTitle(sectionName);
+});
+
+Then('I can see a message {string} returned', async (message: string) => {
+  await commonActions.checkMessage(message);
+});

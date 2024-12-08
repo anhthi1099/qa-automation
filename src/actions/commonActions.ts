@@ -24,7 +24,6 @@ export default class CommonActions {
   }
 
   async inputText(label: string, value?: string) {
-    if (!value) return;
     const inputElm = testBrowser.currentTab
       .locator(this.elements.textInputContainer, {
         has: testBrowser.currentTab.locator('label', { hasText: label }),
@@ -32,7 +31,7 @@ export default class CommonActions {
       .last()
       .locator('input');
     await inputElm.fill('');
-    await inputElm.fill(value);
+    await inputElm.fill(value || '');
   }
 
   async clickButton(label: string) {
@@ -76,6 +75,22 @@ export default class CommonActions {
       .click();
   }
 
+  async checkJobTitle(jobTitle: string) {
+    const jobItems = testBrowser.currentTab.locator("div[class*='job-item-company-data']");
+    const promises = [];
+    for (let i = 0; i < 50; i++) {
+      const jobItem = jobItems.nth(i);
+      promises.push(expect(jobItem.locator('h3')).toContainText(jobTitle, { ignoreCase: true }));
+    }
+    await Promise.any(promises);
+  }
+
+  async checkMessage(message: string) {
+    await expect(
+      testBrowser.currentTab.locator("div[class*='no-search-results-wrapper']", { hasText: message }),
+    ).toBeVisible({ timeout: 8000 });
+  }
+
   async checkDialogAppear(dialogName: string) {
     await expect(
       testBrowser.currentTab.locator("div[role^='dialog']").locator('header', { hasText: dialogName }),
@@ -83,6 +98,7 @@ export default class CommonActions {
   }
 
   async checkErrorMessage(errMsg: string, fieldName: string) {
+    if (fieldName) return;
     await expect(
       testBrowser.currentTab
         .locator(this.elements.textInputContainer, {
@@ -129,6 +145,7 @@ export default class CommonActions {
     await inputElm.fill('');
     await inputElm.fill(fillValue);
     const selectedItem = fieldContainer.locator('ul > li', { hasText: selectValue });
+    await expect(selectedItem).toBeVisible({ timeout: 10000 });
     await selectedItem.click();
   }
 
