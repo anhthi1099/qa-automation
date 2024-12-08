@@ -98,7 +98,6 @@ export default class CommonActions {
   }
 
   async checkErrorMessage(errMsg: string, fieldName: string) {
-    if (fieldName) return;
     await expect(
       testBrowser.currentTab
         .locator(this.elements.textInputContainer, {
